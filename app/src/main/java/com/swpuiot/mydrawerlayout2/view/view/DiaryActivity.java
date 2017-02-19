@@ -82,12 +82,6 @@ public class DiaryActivity extends AppCompatActivity implements View.OnClickList
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         save = (TextView) findViewById(R.id.text_save);
         save.setOnClickListener(this);
-//        lastDay = (TextView) findViewById(R.id.text_lastday);
-//        lastDay.setOnClickListener(this);
-//        nextDay = (TextView) findViewById(R.id.text_nextday);
-//        nextDay.setOnClickListener(this);
-//        choiseDate = (TextView) findViewById(R.id.text_date);
-//        choiseDate.setOnClickListener(this);
         diaTitle = (EditText) findViewById(R.id.text_newdiarytitle);
         diaDate = (TextView) findViewById(R.id.text_newdiarydate);
         diaWeekday = (TextView) findViewById(R.id.text_newdiaryweekday);
@@ -106,7 +100,6 @@ public class DiaryActivity extends AppCompatActivity implements View.OnClickList
         mouth = datePicker.getMonth() + 1;
         day = datePicker.getDayOfMonth();
         year = datePicker.getYear();
-//        choiseDate.setText(year + "年" + mouth + "月" + day + "日");
         diaDate.setText(year + "年" + mouth + "月" + day + "日");
         //获得sharedPreferences对象
         sharedPreferences=getSharedPreferences("diaID",MODE_PRIVATE);
@@ -124,29 +117,7 @@ public class DiaryActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-//            case R.id.text_lastday:
-//                // TODO: 2017/1/17
-//                break;
-//            case R.id.text_nextday:
-//                // TODO: 2017/1/17
-//                break;
-//            case R.id.text_date:
-//                view1 = inflater.inflate(R.layout.mydatepicker, null);
-//                dialog.setTitle("选择日期")
-//                        .setView(view1)
-//                        .setNegativeButton("确定", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                mouth = datePicker.getMonth() + 1;
-//                                day = datePicker.getDayOfMonth();
-//                                year = datePicker.getYear();
-//                                choiseDate.setText(year + "年" + mouth + "月" + day + "日");
-//                                diaDate.setText(year + "年" + mouth + "月" + day + "日");
-//                                dialog.dismiss();
-//                            }
-//                        })
-//                        .show();
-//                break;
+
             case R.id.text_save:
                 setDiary();
 

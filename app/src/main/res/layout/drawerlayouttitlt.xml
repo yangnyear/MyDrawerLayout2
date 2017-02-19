@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:background="?attr/colorPrimaryDark"
+    android:layout_height="150dp">
+    <ImageView
+        android:id="@+id/image_drawerlayout_logo"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/winner_icon"
+        android:layout_marginLeft="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/text_drawerlayout_name"
+        android:text="羊羊"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:layout_marginLeft="15dp"
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.swpuiot.mydrawerlayout2.view.view.ReviseDiaryActivity">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:background="?attr/colorPrimaryDark"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_revisediaryactivity"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_weight="4"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:theme="@android:style/ThemeOverlay.Material.Dark"
+                app:title="修改日记" />
+
+            <TextView
+                android:id="@+id/text_savereviseresult"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="确定"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+
+
+    </android.support.design.widget.AppBarLayout>
+
+    <EditText
+        android:id="@+id/text_revisediarytitle"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:gravity="center_vertical"
+        android:hint="标题"
+        android:padding="12dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/text_revisediarydate"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/text_revisediaryweekday"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/text_revisediayweather"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:layout_weight="1"
+            android:background="@null"
+            android:maxLength="8"
+            android:gravity="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/text_revisediarycontent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:gravity="start"
+        android:padding="12dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp" />
+
+</LinearLayout>
