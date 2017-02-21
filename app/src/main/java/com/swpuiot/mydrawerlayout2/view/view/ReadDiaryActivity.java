@@ -96,10 +96,6 @@ public class ReadDiaryActivity extends AppCompatActivity implements View.OnClick
 
         switch (v.getId()) {
             case R.id.text_gotolastday:
-
-//                if (day<0||day>31||mouth<1||mouth<12){
-//                    return;
-//                }
                 if (day==0&&year==0&&mouth==0){
                     year = diaryEntityBeen.getYear();
                     mouth = diaryEntityBeen.getMouth();
@@ -171,9 +167,6 @@ public class ReadDiaryActivity extends AppCompatActivity implements View.OnClick
                 dateDialog.show();
                 break;
             case R.id.text_gotonextday:;
-//                if (day<0||day>31){
-//                    return;
-//                }
                 maxDayOfMouth=mDataBase.maxDayOfMouth(year, mouth);
                 if (day==0&&year==0&&mouth==0){
                     year = diaryEntityBeen.getYear();
