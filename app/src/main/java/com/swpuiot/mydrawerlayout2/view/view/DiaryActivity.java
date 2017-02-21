@@ -120,7 +120,6 @@ public class DiaryActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.text_save:
                 setDiary();
-
                 break;
 
         }
@@ -178,6 +177,7 @@ public class DiaryActivity extends AppCompatActivity implements View.OnClickList
             values.put("diaContent", contentLooper);
             mDataBase.save("Diary", values);
             Toast.makeText(DiaryActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
+            setResult(RESULT_OK);
             finish();
         } else {
             titleLooper = diaTitle.getText().toString();
@@ -201,6 +201,7 @@ public class DiaryActivity extends AppCompatActivity implements View.OnClickList
             values.put("diaContent", contentLooper);
             mDataBase.save("Diary", values);
             Toast.makeText(DiaryActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
+            setResult(RESULT_OK);
             finish();
         }
 

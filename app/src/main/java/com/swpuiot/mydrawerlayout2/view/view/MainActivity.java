@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
                 if (!isWrite()) {
                     Toast.makeText(MainActivity.this, "今天天写过日记啦，可以选择修改", Toast.LENGTH_SHORT).show();
                 } else {
-                    startActivity(intent);
+                    startActivityForResult(intent, 1);
                 }
 
                 return true;
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
         Toast.makeText(MainActivity.this, "选中第" + diaryBeen.getDiaId() + "个日记", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(MainActivity.this, ReadDiaryActivity.class);
         intent.putExtra("readDiaryBeen", diaryBeen);
-        startActivity(intent);
+       startActivity(intent);
 
 
     }
@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
                 Toast.makeText(MainActivity.this, "选中第" + diaryBeen.getDiaId() + "个日记", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, ReviseDiaryActivity.class);
                 intent.putExtra("DiaryBeen", diaryBeen);
-                startActivity(intent);
+               startActivityForResult(intent, 1);
                 dialog.dismiss();
             }
         });
@@ -184,6 +184,24 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
                             public void onClick(DialogInterface dialog, int which) {
                                 mDataBase.deletDiary(diaryBeen.getDiaId());
                                 Toast.makeText(MainActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+                                diaryEntityList.clear();
+                                mRecycleView.removeAllViews();
+                                diaryIInformationEntityList.clear();
+                                mDataBase.selectDiary(diaryEntityList);
+                                mDataBase.selectDiary(diaryEntityList);
+                                for (int i = 0; i < diaryEntityList.size(); i++) {
+                                    diaryIInformationEntityList.add(new DiaryIInformationEntity(diaryEntityList.get(i).getDiaTitle(),
+                                            diaryEntityList.get(i).getDiaDate(),
+                                            diaryEntityList.get(i).getDiaWenkday(),
+                                            diaryEntityList.get(i).getDiaWeather(),
+                                            diaryEntityList.get(i).getDiaId()));
+                                }
+                                if (diaryIInformationEntityList != null) {
+                                    RecyclerViewAdapter adapter = new RecyclerViewAdapter(MainActivity.this, diaryIInformationEntityList);
+                                    mRecycleView.setAdapter(adapter);
+                                    adapter.setOnItemClickListener(MainActivity.this);
+                                    adapter.setOnItemLongClickListener(MainActivity.this);
+                                }
                             }
                         })
                         .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -205,4 +223,29 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (resultCode){
+            case RESULT_OK:
+                diaryEntityList.clear();
+                mRecycleView.removeAllViews();
+                diaryIInformationEntityList.clear();
+                mDataBase.selectDiary(diaryEntityList);
+                for (int i = 0; i < diaryEntityList.size(); i++) {
+                    diaryIInformationEntityList.add(new DiaryIInformationEntity(diaryEntityList.get(i).getDiaTitle(),
+                            diaryEntityList.get(i).getDiaDate(),
+                            diaryEntityList.get(i).getDiaWenkday(),
+                            diaryEntityList.get(i).getDiaWeather(),
+                            diaryEntityList.get(i).getDiaId()));
+                }
+                if (diaryIInformationEntityList != null) {
+                    RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, diaryIInformationEntityList);
+                    mRecycleView.setAdapter(adapter);
+                    adapter.setOnItemClickListener(this);
+                    adapter.setOnItemLongClickListener(this);
+                } else
+                    Toast.makeText(this, "快开始写日记吧", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
 }

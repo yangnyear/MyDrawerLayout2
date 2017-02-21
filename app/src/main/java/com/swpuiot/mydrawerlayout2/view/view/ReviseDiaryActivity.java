@@ -97,6 +97,7 @@ public class ReviseDiaryActivity extends AppCompatActivity implements View.OnCli
         }
         mDatabase.upDateDiary(diaryEntityBeen.getDiaId(), title, weather, content);
         Toast.makeText(ReviseDiaryActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+        setResult(RESULT_OK);
         finish();
     }
 }
