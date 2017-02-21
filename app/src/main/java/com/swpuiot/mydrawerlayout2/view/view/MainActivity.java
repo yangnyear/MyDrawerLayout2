@@ -116,7 +116,6 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
                 } else {
                     startActivity(intent);
                 }
-//                startActivity(intent);
 
                 return true;
         }
@@ -202,7 +201,6 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
 //            public void onClick(View v) {
 //                dialog.dismiss();
 //                Toast.makeText(MainActivity.this, "暂时还不能加密，等待更新", Toast.LENGTH_SHORT).show();
-//                // TODO: 2017/2/19 加密
 //            }
 //        });
     }
