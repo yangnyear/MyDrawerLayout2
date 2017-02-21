@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
 //                dialog.dismiss();
 //                Toast.makeText(MainActivity.this, "暂时还不能加密，等待更新", Toast.LENGTH_SHORT).show();
 //            }
-//        });
+
     }
 
 }
