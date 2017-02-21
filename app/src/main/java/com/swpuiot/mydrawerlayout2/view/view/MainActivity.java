@@ -44,7 +44,9 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
     private LayoutInflater inflater;
     private TextView readDiary;
     private TextView delDiary;
-    private TextView setPasswd;
+//    private TextView setPasswd;
+    private String date, tody;
+
 
 
     @Override
@@ -109,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
                 break;
             case R.id.action_settings:
                 Intent intent = new Intent(MainActivity.this, DiaryActivity.class);
-                if (isWrite()) {
+                if (!isWrite()) {
                     Toast.makeText(MainActivity.this, "今天天写过日记啦，可以选择修改", Toast.LENGTH_SHORT).show();
                 } else {
                     startActivity(intent);
@@ -123,13 +125,17 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
 
 
     public boolean isWrite() {
-        String date = diaryEntityList.get(diaryEntityList.size() - 1).getDiaDate();
-        view = inflater.inflate(R.layout.mydatepicker, null);
-        datePicker = (DatePicker) view.findViewById(R.id.tatepicker_coisetime);
-        String tody = datePicker.getMonth() + 1 + "年" + datePicker.getDayOfMonth() + "月" + datePicker.getYear() + "日";
+        if (diaryEntityList.size()<1) {
+            return true;
+        } else {
+            date = diaryEntityList.get(diaryEntityList.size()-1).getDiaDate();
+            view = inflater.inflate(R.layout.mydatepicker, null);
+            datePicker = (DatePicker) view.findViewById(R.id.tatepicker_coisetime);
+            tody = datePicker.getYear() + "年" + (datePicker.getMonth()+1) + "月" + datePicker.getDayOfMonth() + "日";
+        }
         if (date.equals(tody)) {
             return false;
-        } else {
+        } else{
             return true;
         }
     }
@@ -178,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 mDataBase.deletDiary(diaryBeen.getDiaId());
-                                Toast.makeText(MainActivity.this,"删除成功", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -190,13 +196,15 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
                 warmDialog.show();
             }
         });
-        setPasswd = (TextView) dialogView.findViewById(R.id.text_addpasswd);
-        setPasswd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: 2017/2/19 加密
-            }
-        });
+//        setPasswd = (TextView) dialogView.findViewById(R.id.text_addpasswd);
+//        setPasswd.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//                Toast.makeText(MainActivity.this, "暂时还不能加密，等待更新", Toast.LENGTH_SHORT).show();
+//                // TODO: 2017/2/19 加密
+//            }
+//        });
     }
 
 }

@@ -14,15 +14,6 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/text_addpasswd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:text="加密此日记"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp" />
-
-    <TextView
         android:id="@+id/text_delatdiary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

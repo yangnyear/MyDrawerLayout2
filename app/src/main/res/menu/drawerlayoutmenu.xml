@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <group android:checkableBehavior="single">
     <item
-        android:title="第一个item"/>
+        android:title="数据统计"/>
     <item
-        android:title="第二个item"/>
+        android:title="上月今天"/>
     <item
-        android:title="第三个item"/>
+        android:title="定时提醒"/>
     <item
-        android:title="第四个item"/>
+        android:title="第四个item" />
 </group>
     <item android:title="其他">
         <menu>
@@ -16,8 +16,6 @@
                 android:title="设置"/>
             <item
                 android:title="关于应用"/>
-            <item
-                android:title="推出程序"/>
         </menu>
     </item>
 </menu>

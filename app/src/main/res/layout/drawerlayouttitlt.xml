@@ -13,7 +13,7 @@
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/text_drawerlayout_name"
-        android:text="羊羊"
+        android:text="爱写日记"
         android:textColor="#fff"
         android:textSize="20sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
