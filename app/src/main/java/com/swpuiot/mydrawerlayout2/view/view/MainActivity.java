@@ -142,7 +142,6 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
     @Override
     public void onItemClick(View view, int postion) {
         DiaryEntity diaryBeen = diaryEntityList.get(postion);
-        Toast.makeText(MainActivity.this, "选中第" + diaryBeen.getDiaId() + "个日记", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(MainActivity.this, ReadDiaryActivity.class);
         intent.putExtra("readDiaryBeen", diaryBeen);
        startActivity(intent);
@@ -162,7 +161,6 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
         readDiary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "选中第" + diaryBeen.getDiaId() + "个日记", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, ReviseDiaryActivity.class);
                 intent.putExtra("DiaryBeen", diaryBeen);
                startActivityForResult(intent, 1);

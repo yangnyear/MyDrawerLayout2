@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.DatePicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.swpuiot.mydrawerlayout2.R;
 import com.swpuiot.mydrawerlayout2.view.controler.DataBaseFunction;
@@ -129,7 +128,6 @@ public class ReadDiaryActivity extends AppCompatActivity implements View.OnClick
                     readDiaryWeekDay.setText("");
                     readDiaryWeather.setText("");
                     readDiaryContent.setText("");
-                    Toast.makeText(ReadDiaryActivity.this,"这一天啥也没有",Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.text_thisday:
@@ -159,7 +157,7 @@ public class ReadDiaryActivity extends AppCompatActivity implements View.OnClick
                                     readDiaryWeekDay.setText("");
                                     readDiaryWeather.setText("");
                                     readDiaryContent.setText("");
-                                    Toast.makeText(ReadDiaryActivity.this,"这一天啥也没有",Toast.LENGTH_LONG).show();
+                                    today.setText(year + "年" + mouth + "月" + day + "日");
                                 }
                             }
 
@@ -200,7 +198,6 @@ public class ReadDiaryActivity extends AppCompatActivity implements View.OnClick
                     readDiaryWeekDay.setText("");
                     readDiaryWeather.setText("");
                     readDiaryContent.setText("");
-                    Toast.makeText(ReadDiaryActivity.this,"这一天啥也没有",Toast.LENGTH_LONG).show();
                 }
                 break;
         }
