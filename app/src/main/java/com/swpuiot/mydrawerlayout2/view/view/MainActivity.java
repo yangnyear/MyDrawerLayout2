@@ -3,7 +3,9 @@ package com.swpuiot.mydrawerlayout2.view.view;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -31,9 +33,10 @@ import com.swpuiot.mydrawerlayout2.view.model.DiaryIInformationEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MyItemClickListener, MyItemLongClickListener {
+public class MainActivity extends AppCompatActivity implements MyItemClickListener, MyItemLongClickListener, NavigationView.OnNavigationItemSelectedListener {
     private Toolbar toolBar;
     private DrawerLayout MDrawerLayout;
+    private NavigationView navigationView;
     private RecyclerView mRecycleView;
     private List<DiaryEntity> diaryEntityList;
     private List<DiaryIInformationEntity> diaryIInformationEntityList;
@@ -44,9 +47,11 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
     private LayoutInflater inflater;
     private TextView readDiary;
     private TextView delDiary;
-//    private TextView setPasswd;
+    private DiaryEntity diaryEntitybeen;
+    //    private TextView setPasswd;
     private String date, tody;
-
+    private SharedPreferences sharedPreferences;
+    private int idLooper = 0;
 
 
     @Override
@@ -82,6 +87,16 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
 
         //初始化inflater
         inflater = LayoutInflater.from(MainActivity.this);
+        //初始化NavigationView 并注册监听
+        navigationView = (NavigationView) findViewById(R.id.navigation_main);
+        if (navigationView != null) {
+            navigationView.setNavigationItemSelectedListener(this);
+        }
+        view = inflater.inflate(R.layout.mydatepicker, null);
+        datePicker = (DatePicker) view.findViewById(R.id.tatepicker_coisetime);
+
+        sharedPreferences = getSharedPreferences("diaID", MODE_PRIVATE);
+        idLooper = sharedPreferences.getInt("idLooper", idLooper);
 
 
         diaryEntityList = new ArrayList<DiaryEntity>();
@@ -122,53 +137,57 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
         return super.onOptionsItemSelected(item);
     }
 
-
+    //判断今天是否写过日记
     public boolean isWrite() {
-        if (diaryEntityList.size()<1) {
+        if (diaryEntityList.size() < 1) {
             return true;
         } else {
-            date = diaryEntityList.get(diaryEntityList.size()-1).getDiaDate();
-            view = inflater.inflate(R.layout.mydatepicker, null);
-            datePicker = (DatePicker) view.findViewById(R.id.tatepicker_coisetime);
-            tody = datePicker.getYear() + "年" + (datePicker.getMonth()+1) + "月" + datePicker.getDayOfMonth() + "日";
+            date = diaryEntityList.get(diaryEntityList.size() - 1).getDiaDate();
+            tody = datePicker.getYear() + "年" + (datePicker.getMonth() + 1) + "月" + datePicker.getDayOfMonth() + "日";
         }
         if (date.equals(tody)) {
             return false;
-        } else{
+        } else {
             return true;
         }
     }
 
+    //点击某个日记进行查看
     @Override
     public void onItemClick(View view, int postion) {
         DiaryEntity diaryBeen = diaryEntityList.get(postion);
         Intent intent = new Intent(MainActivity.this, ReadDiaryActivity.class);
         intent.putExtra("readDiaryBeen", diaryBeen);
-       startActivity(intent);
+        startActivity(intent);
 
 
     }
 
+    //长按弹出dialog
     @Override
     public void onItemLongClick(View view, int postion) {
+        //首先给出编辑,删除选项
         dialogView = inflater.inflate(R.layout.longclickitem, null);
         final DiaryEntity diaryBeen = diaryEntityList.get(postion);
         final AlertDialog dialog = new AlertDialog
                 .Builder(MainActivity.this)
                 .setView(dialogView)
                 .show();
+
         readDiary = (TextView) dialogView.findViewById(R.id.text_readdiary);
+        //选择编辑时跳转到编辑界面
         readDiary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ReviseDiaryActivity.class);
                 intent.putExtra("DiaryBeen", diaryBeen);
-               startActivityForResult(intent, 1);
+                startActivityForResult(intent, 1);
                 dialog.dismiss();
             }
         });
 
         delDiary = (TextView) dialogView.findViewById(R.id.text_delatdiary);
+        //选择删除时弹出提示框
         delDiary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -182,6 +201,7 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
                             public void onClick(DialogInterface dialog, int which) {
                                 mDataBase.deletDiary(diaryBeen.getDiaId());
                                 Toast.makeText(MainActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+                                //删除成功后更新界面
                                 diaryEntityList.clear();
                                 mRecycleView.removeAllViews();
                                 diaryIInformationEntityList.clear();
@@ -201,6 +221,7 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
                                 }
                             }
                         })
+                                //取消,不进行删除
                         .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -220,9 +241,10 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
 
     }
 
+    //当界面返回时,刷新界面
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (resultCode){
+        switch (resultCode) {
             case RESULT_OK:
                 diaryEntityList.clear();
                 mRecycleView.removeAllViews();
@@ -244,5 +266,49 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
                     Toast.makeText(this, "快开始写日记吧", Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    //navigationView点击事件
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item_dataconnecter:
+                MDrawerLayout.closeDrawers();
+                AlertDialog.Builder dialog = (AlertDialog.Builder) new AlertDialog
+                        .Builder(MainActivity.this)
+                        .setTitle("数据统计")
+                        .setMessage("您现在有" + diaryEntityList.size() + "篇日记\n"
+                                + "您总共写过" + idLooper + "篇日记\n"
+                                + "您删掉了" + (idLooper - diaryEntityList.size()) + "篇日记");
+                dialog.show();
+
+
+                break;
+            case R.id.item_todayoflastmouth:
+                int year = datePicker.getYear();
+                int mouth = datePicker.getMonth();
+                int day = datePicker.getDayOfMonth();
+                int[] date = {year, mouth, day};
+                Intent intent = new Intent(MainActivity.this, ReadDiaryActivity.class);
+                intent.putExtra("date", date);
+                startActivity(intent);
+                MDrawerLayout.closeDrawers();
+
+                break;
+            case R.id.item_settimetonotificate:
+
+                break;
+            case R.id.item_:
+
+                break;
+            case R.id.item_setting:
+
+                break;
+            case R.id.item_aboutapp:
+
+                break;
+        }
+
+        return true;
     }
 }

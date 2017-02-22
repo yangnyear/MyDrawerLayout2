@@ -74,12 +74,38 @@ public class ReadDiaryActivity extends AppCompatActivity implements View.OnClick
 
         if (getIntent().hasExtra("readDiaryBeen")) {
             diaryEntityBeen = (DiaryEntity) getIntent().getSerializableExtra("readDiaryBeen");
-            readDiaryTitle.setText(diaryEntityBeen.getDiaTitle());
-            readDiaryDate.setText(diaryEntityBeen.getDiaDate());
-            readDiaryWeekDay.setText(diaryEntityBeen.getDiaWenkday());
-            readDiaryWeather.setText(diaryEntityBeen.getDiaWeather());
-            readDiaryContent.setText(diaryEntityBeen.getDiaContent());
-            today.setText(diaryEntityBeen.getDiaDate());
+            if (diaryEntityBeen!=null){
+                readDiaryTitle.setText(diaryEntityBeen.getDiaTitle());
+                readDiaryDate.setText(diaryEntityBeen.getDiaDate());
+                readDiaryWeekDay.setText(diaryEntityBeen.getDiaWenkday());
+                readDiaryWeather.setText(diaryEntityBeen.getDiaWeather());
+                readDiaryContent.setText(diaryEntityBeen.getDiaContent());
+                today.setText(diaryEntityBeen.getDiaDate());
+            }
+        }else if (getIntent().hasExtra("date")){
+            int[] date=getIntent().getIntArrayExtra("date");
+            if (date!=null){
+                year=date[0];
+                mouth=date[1];
+                day=date[2];
+                diaryEntityBeen = mDataBase.selectByDate(year, mouth, day);
+                if (diaryEntityBeen != null) {
+                    readDiaryTitle.setText(diaryEntityBeen.getDiaTitle());
+                    readDiaryDate.setText(diaryEntityBeen.getDiaDate());
+                    readDiaryWeekDay.setText(diaryEntityBeen.getDiaWenkday());
+                    readDiaryWeather.setText(diaryEntityBeen.getDiaWeather());
+                    readDiaryContent.setText(diaryEntityBeen.getDiaContent());
+                    today.setText(diaryEntityBeen.getDiaDate());
+                }
+                else {
+                    today.setText(year + "年" + mouth + "月" + day + "日");
+                    readDiaryTitle.setText("");
+                    readDiaryDate.setText("");
+                    readDiaryWeekDay.setText("");
+                    readDiaryWeather.setText("");
+                    readDiaryContent.setText("");
+                }
+            }
         }
     }
 
@@ -91,7 +117,6 @@ public class ReadDiaryActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        DiaryEntity selectDiaryEntity;
 
         switch (v.getId()) {
             case R.id.text_gotolastday:
@@ -112,14 +137,14 @@ public class ReadDiaryActivity extends AppCompatActivity implements View.OnClick
                 }else if (day>1&mouth>=1){
                     --day;
                 }
-                selectDiaryEntity = mDataBase.selectByDate(year, mouth, day);
-                if (selectDiaryEntity != null) {
-                    readDiaryTitle.setText(selectDiaryEntity.getDiaTitle());
-                    readDiaryDate.setText(selectDiaryEntity.getDiaDate());
-                    readDiaryWeekDay.setText(selectDiaryEntity.getDiaWenkday());
-                    readDiaryWeather.setText(selectDiaryEntity.getDiaWeather());
-                    readDiaryContent.setText(selectDiaryEntity.getDiaContent());
-                    today.setText(selectDiaryEntity.getDiaDate());
+                diaryEntityBeen = mDataBase.selectByDate(year, mouth, day);
+                if (diaryEntityBeen != null) {
+                    readDiaryTitle.setText(diaryEntityBeen.getDiaTitle());
+                    readDiaryDate.setText(diaryEntityBeen.getDiaDate());
+                    readDiaryWeekDay.setText(diaryEntityBeen.getDiaWenkday());
+                    readDiaryWeather.setText(diaryEntityBeen.getDiaWeather());
+                    readDiaryContent.setText(diaryEntityBeen.getDiaContent());
+                    today.setText(diaryEntityBeen.getDiaDate());
                 }
                 else {
                    today.setText(year + "年" + mouth + "月" + day + "日");
@@ -183,14 +208,14 @@ public class ReadDiaryActivity extends AppCompatActivity implements View.OnClick
                 }else if (day<maxDayOfMouth){
                     ++day;
                 }
-                selectDiaryEntity = mDataBase.selectByDate(year, mouth, day);
-                if (selectDiaryEntity != null) {
-                    readDiaryTitle.setText(selectDiaryEntity.getDiaTitle());
-                    readDiaryDate.setText(selectDiaryEntity.getDiaDate());
-                    readDiaryWeekDay.setText(selectDiaryEntity.getDiaWenkday());
-                    readDiaryWeather.setText(selectDiaryEntity.getDiaWeather());
-                    readDiaryContent.setText(selectDiaryEntity.getDiaContent());
-                    today.setText(selectDiaryEntity.getDiaDate());
+                diaryEntityBeen = mDataBase.selectByDate(year, mouth, day);
+                if (diaryEntityBeen != null) {
+                    readDiaryTitle.setText(diaryEntityBeen.getDiaTitle());
+                    readDiaryDate.setText(diaryEntityBeen.getDiaDate());
+                    readDiaryWeekDay.setText(diaryEntityBeen.getDiaWenkday());
+                    readDiaryWeather.setText(diaryEntityBeen.getDiaWeather());
+                    readDiaryContent.setText(diaryEntityBeen.getDiaContent());
+                    today.setText(diaryEntityBeen.getDiaDate());
                 }else {
                     today.setText(year + "年" + mouth + "月" + day + "日");
                     readDiaryTitle.setText("");
