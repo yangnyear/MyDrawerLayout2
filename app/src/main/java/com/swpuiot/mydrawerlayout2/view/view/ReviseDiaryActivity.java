@@ -95,7 +95,8 @@ public class ReviseDiaryActivity extends AppCompatActivity implements View.OnCli
             Toast.makeText(ReviseDiaryActivity.this, "内容都没有!", Toast.LENGTH_SHORT).show();
             return;
         }
-        mDatabase.upDateDiary(diaryEntityBeen.getDiaId(), title, weather, content);
+        Object[] values=new Object[]{title, weather, content};
+        mDatabase.upDateDiary(diaryEntityBeen.getDiaId(),values );
         Toast.makeText(ReviseDiaryActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
         setResult(RESULT_OK);
         finish();

@@ -1,7 +1,6 @@
 package com.swpuiot.mydrawerlayout2.view.view;
 
 import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -46,7 +45,7 @@ public class DiaryActivity extends AppCompatActivity implements View.OnClickList
     //database
     private MyDtaBaseHelper dtaBaseHelper;
     private DataBaseFunction mDataBase;
-    private ContentValues values;
+    private Object[] values;
 
     //Looper
     private int idLooper=0;
@@ -93,7 +92,6 @@ public class DiaryActivity extends AppCompatActivity implements View.OnClickList
         //初始化数据库
         dtaBaseHelper = new MyDtaBaseHelper(this, "MyDiary.db", null, 1);
         mDataBase=new DataBaseFunction(this);
-        values = new ContentValues();
         dtaBaseHelper.getWritableDatabase();
         view = inflater.inflate(R.layout.mydatepicker, null);
         datePicker = (DatePicker) view.findViewById(R.id.tatepicker_coisetime);
@@ -159,7 +157,7 @@ public class DiaryActivity extends AppCompatActivity implements View.OnClickList
             titleLooper = "无标题";
             idLooper = ++idLooper;
 
-            editor.putInt("idLooper",idLooper);
+            editor.putInt("idLooper", idLooper);
             editor.commit();
 
             yearLooper = year;
@@ -167,15 +165,8 @@ public class DiaryActivity extends AppCompatActivity implements View.OnClickList
             dayLooper = day;
             weatherLooper = diaWeather.getText().toString();
             contentLooper = diaContent.getText().toString();
-            values.put("diaID", idLooper);
-            values.put("diaTile", titleLooper);
-            values.put("diaYear", yearLooper);
-            values.put("diaMouth", mouthLooper);
-            values.put(" diaDay", dayLooper);
-            values.put("diaWeekday ", weekdayLooper);
-            values.put("diaWeather", weatherLooper);
-            values.put("diaContent", contentLooper);
-            mDataBase.save("Diary", values);
+            values=new Object[]{idLooper,titleLooper, yearLooper, mouthLooper, dayLooper, weekdayLooper, weatherLooper, contentLooper};
+            mDataBase.save(values);
             Toast.makeText(DiaryActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
             setResult(RESULT_OK);
             finish();
@@ -191,15 +182,9 @@ public class DiaryActivity extends AppCompatActivity implements View.OnClickList
             dayLooper = day;
             weatherLooper = diaWeather.getText().toString();
             contentLooper = diaContent.getText().toString();
-            values.put("diaID", idLooper);
-            values.put("diaTile", titleLooper);
-            values.put("diaYear", yearLooper);
-            values.put("diaMouth", mouthLooper);
-            values.put(" diaDay", dayLooper);
-            values.put("diaWeekday ", weekdayLooper);
-            values.put("diaWeather", weatherLooper);
-            values.put("diaContent", contentLooper);
-            mDataBase.save("Diary", values);
+            values=new Object[]{idLooper,titleLooper, yearLooper, mouthLooper, dayLooper, weekdayLooper, weatherLooper, contentLooper};
+
+            mDataBase.save(values);
             Toast.makeText(DiaryActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
             setResult(RESULT_OK);
             finish();

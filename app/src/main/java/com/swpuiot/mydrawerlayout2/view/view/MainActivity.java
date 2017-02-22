@@ -186,7 +186,6 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
                                 mRecycleView.removeAllViews();
                                 diaryIInformationEntityList.clear();
                                 mDataBase.selectDiary(diaryEntityList);
-                                mDataBase.selectDiary(diaryEntityList);
                                 for (int i = 0; i < diaryEntityList.size(); i++) {
                                     diaryIInformationEntityList.add(new DiaryIInformationEntity(diaryEntityList.get(i).getDiaTitle(),
                                             diaryEntityList.get(i).getDiaDate(),

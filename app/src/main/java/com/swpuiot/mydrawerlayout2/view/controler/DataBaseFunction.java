@@ -1,6 +1,5 @@
 package com.swpuiot.mydrawerlayout2.view.controler;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -24,9 +23,11 @@ public class DataBaseFunction {
         db = dtaBaseHelper.getWritableDatabase();
     }
 
-    public void save(String name, ContentValues values) {
+    public void save(Object[] values) {
+        String insetSQL="insert into Diary(diaID,diaTile,diaYear,diaMouth,diaDay,diaWeekday,diaWeather,diaContent)" +
+                " values(?,?,?,?,?,?,?,?)";
         if (values != null)
-            db.insert(name, null, values);
+            db.execSQL(insetSQL, values);
         else return;
     }
 
@@ -53,15 +54,15 @@ public class DataBaseFunction {
         cursor.close();
     }
 
-    public void upDateDiary(int id, String title, String weather, String content) {
-        if (!title.equals("") && !weather.equals("") && !content.equals("")) {
-            String upDateSql = "update Diary set diaTile='" + title
-                    + "',diaWeather='" + weather
-                    + "',diaContent='" + content
-                    + "'\n"
+    public void upDateDiary(int id, Object[] values) {
+        if (values!=null) {
+            String upDateSql = "update Diary set diaTile=?"
+                    + ",diaWeather=?"
+                    + ",diaContent=?"
+                    + "\n"
                     + "where diaID='" + id
                     + "'";
-            db.execSQL(upDateSql);
+            db.execSQL(upDateSql,values);
         }
     }
 
