@@ -3,24 +3,30 @@
 <group android:checkableBehavior="single">
     <item
         android:id="@+id/item_dataconnecter"
+        android:icon="@drawable/ic_abc_image_data"
         android:title="数据统计"/>
     <item
         android:id="@+id/item_todayoflastmouth"
+        android:icon="@drawable/ic_abc_image_lastmouth"
         android:title="上月今天"/>
     <item
         android:id="@+id/item_settimetonotificate"
+        android:icon="@drawable/ic_abc_image_time"
         android:title="定时提醒"/>
     <item
         android:id="@+id/item_"
+        android:icon="@drawable/ic_abc_image_"
         android:title="第四个item" />
 </group>
     <item android:title="其他">
         <menu>
             <item
                 android:id="@+id/item_setting"
+                android:icon="@drawable/ic_abc_image_setting"
                 android:title="设置"/>
             <item
                 android:id="@+id/item_aboutapp"
+                android:icon="@drawable/ic_thisapp"
                 android:title="关于应用"/>
         </menu>
     </item>

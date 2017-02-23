@@ -271,6 +271,7 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
     //navigationView点击事件
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
             case R.id.item_dataconnecter:
                 MDrawerLayout.closeDrawers();
@@ -281,31 +282,32 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
                                 + "您总共写过" + idLooper + "篇日记\n"
                                 + "您删掉了" + (idLooper - diaryEntityList.size()) + "篇日记");
                 dialog.show();
-
-
                 break;
             case R.id.item_todayoflastmouth:
                 int year = datePicker.getYear();
                 int mouth = datePicker.getMonth();
                 int day = datePicker.getDayOfMonth();
                 int[] date = {year, mouth, day};
-                Intent intent = new Intent(MainActivity.this, ReadDiaryActivity.class);
+                 intent = new Intent(MainActivity.this, ReadDiaryActivity.class);
                 intent.putExtra("date", date);
                 startActivity(intent);
                 MDrawerLayout.closeDrawers();
-
                 break;
             case R.id.item_settimetonotificate:
-
+// TODO: 2017/2/22 后台,提醒
                 break;
             case R.id.item_:
-
+// TODO: 2017/2/23
                 break;
             case R.id.item_setting:
-
+                intent=new Intent(MainActivity.this,SettingActivity.class);
+                startActivity(intent);
+                MDrawerLayout.closeDrawers();
                 break;
             case R.id.item_aboutapp:
-
+                MDrawerLayout.closeDrawers();
+                intent=new Intent(MainActivity.this,AboutAPPActivity.class);
+                startActivity(intent);
                 break;
         }
 

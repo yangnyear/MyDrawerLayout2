@@ -19,7 +19,9 @@
         </activity>
         <activity android:name=".view.view.DiaryActivity" />
         <activity android:name=".view.view.ReviseDiaryActivity" />
-        <activity android:name=".view.view.ReadDiaryActivity"></activity>
+        <activity android:name=".view.view.ReadDiaryActivity" />
+        <activity android:name=".view.view.AboutAPPActivity" />
+        <activity android:name=".view.view.SettingActivity"></activity>
     </application>
 
 </manifest>
