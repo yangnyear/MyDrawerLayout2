@@ -21,13 +21,14 @@
             android:background="?attr/colorPrimaryDark"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:theme="@android:style/ThemeOverlay.Material.Dark" />
+            app:theme="@android:style/ThemeOverlay.Material.Dark"
+            />
 
         <android.support.v7.widget.RecyclerView
-            android:background="#eae9e9"
             android:id="@+id/recycleview_diary"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#eae9e9">
 
         </android.support.v7.widget.RecyclerView>
 

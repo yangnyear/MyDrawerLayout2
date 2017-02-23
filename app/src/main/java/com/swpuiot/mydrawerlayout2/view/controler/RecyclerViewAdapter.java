@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.swpuiot.mydrawerlayout2.R;
-import com.swpuiot.mydrawerlayout2.view.model.DiaryIInformationEntity;
+import com.swpuiot.mydrawerlayout2.view.model.DiaryEntity;
 import com.swpuiot.mydrawerlayout2.view.model.MyViewHolder;
 
 import java.util.List;
@@ -20,9 +20,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
     private LayoutInflater layoutInflater;
     private MyItemClickListener mItemClickListener;
     private MyItemLongClickListener mItemLongClickListener;
-    private List<DiaryIInformationEntity> diaryIInformationEntityList;
+    private List<DiaryEntity> diaryIInformationEntityList;
 
-    public RecyclerViewAdapter(Context context,List<DiaryIInformationEntity> diaryIInformationEntityList) {
+    public RecyclerViewAdapter(Context context,List<DiaryEntity> diaryIInformationEntityList) {
         this.context = context;
         this.diaryIInformationEntityList = diaryIInformationEntityList;
         this.layoutInflater = LayoutInflater.from(context);
@@ -37,10 +37,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.diaryTitle.setText(diaryIInformationEntityList.get(position).getDiaryTitle());
-        holder.datefiled.setText(diaryIInformationEntityList.get(position).getDate());
-        holder.weekday.setText(diaryIInformationEntityList.get(position).getWenkday());
-        holder.weather.setText(diaryIInformationEntityList.get(position).getWeather());
+        holder.diaryTitle.setText(diaryIInformationEntityList.get(position).getDiaTitle());
+        holder.datefiled.setText(diaryIInformationEntityList.get(position).getDiaDate());
+        holder.weekday.setText(diaryIInformationEntityList.get(position).getDiaWenkday());
+        holder.weather.setText(diaryIInformationEntityList.get(position).getDiaWeather());
         holder.diaId.setText(diaryIInformationEntityList.get(position).getDiaId()+"");
 
     }

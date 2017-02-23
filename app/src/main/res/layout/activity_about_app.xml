@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="酰胺石油大学翼灵物联工作室 Yangnyear"
+        android:text="西南石油大学翼灵物联工作室 Yangnyear"
         android:textColor="#fff"
         android:textSize="16sp"
         android:layout_alignParentBottom="true"

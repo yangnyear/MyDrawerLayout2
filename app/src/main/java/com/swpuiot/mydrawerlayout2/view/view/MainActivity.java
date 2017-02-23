@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
         //初始化
         initializete();
         //配置RecyclerView的Adapter
-        if (diaryIInformationEntityList != null) {
-            RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, diaryIInformationEntityList);
+        if (diaryEntityList != null) {
+            RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, diaryEntityList);
             mRecycleView.setAdapter(adapter);
             adapter.setOnItemClickListener(this);
             adapter.setOnItemLongClickListener(this);
@@ -76,7 +76,9 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
         toolBar = (Toolbar) findViewById(R.id.toolbar_main);
         setSupportActionBar(toolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.winner_icon);
+//        toolBar.setNavigationIcon(R.drawable.ic_abc_image_todrawlayout);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.abc_ic_menu_selectall_mtrl_alpha);
+
         MDrawerLayout = (DrawerLayout) findViewById(R.id.dl_main_drawer);
         mRecycleView = (RecyclerView) findViewById(R.id.recycleview_diary);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -103,13 +105,6 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
         diaryIInformationEntityList = new ArrayList<DiaryIInformationEntity>();
         mDataBase = new DataBaseFunction(this);
         mDataBase.selectDiary(diaryEntityList);
-        for (int i = 0; i < diaryEntityList.size(); i++) {
-            diaryIInformationEntityList.add(new DiaryIInformationEntity(diaryEntityList.get(i).getDiaTitle(),
-                    diaryEntityList.get(i).getDiaDate(),
-                    diaryEntityList.get(i).getDiaWenkday(),
-                    diaryEntityList.get(i).getDiaWeather(),
-                    diaryEntityList.get(i).getDiaId()));
-        }
     }
 
     @Override
@@ -204,17 +199,10 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
                                 //删除成功后更新界面
                                 diaryEntityList.clear();
                                 mRecycleView.removeAllViews();
-                                diaryIInformationEntityList.clear();
+                                diaryEntityList.clear();
                                 mDataBase.selectDiary(diaryEntityList);
-                                for (int i = 0; i < diaryEntityList.size(); i++) {
-                                    diaryIInformationEntityList.add(new DiaryIInformationEntity(diaryEntityList.get(i).getDiaTitle(),
-                                            diaryEntityList.get(i).getDiaDate(),
-                                            diaryEntityList.get(i).getDiaWenkday(),
-                                            diaryEntityList.get(i).getDiaWeather(),
-                                            diaryEntityList.get(i).getDiaId()));
-                                }
-                                if (diaryIInformationEntityList != null) {
-                                    RecyclerViewAdapter adapter = new RecyclerViewAdapter(MainActivity.this, diaryIInformationEntityList);
+                                if (diaryEntityList != null) {
+                                    RecyclerViewAdapter adapter = new RecyclerViewAdapter(MainActivity.this, diaryEntityList);
                                     mRecycleView.setAdapter(adapter);
                                     adapter.setOnItemClickListener(MainActivity.this);
                                     adapter.setOnItemLongClickListener(MainActivity.this);
@@ -248,17 +236,10 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
             case RESULT_OK:
                 diaryEntityList.clear();
                 mRecycleView.removeAllViews();
-                diaryIInformationEntityList.clear();
+                diaryEntityList.clear();
                 mDataBase.selectDiary(diaryEntityList);
-                for (int i = 0; i < diaryEntityList.size(); i++) {
-                    diaryIInformationEntityList.add(new DiaryIInformationEntity(diaryEntityList.get(i).getDiaTitle(),
-                            diaryEntityList.get(i).getDiaDate(),
-                            diaryEntityList.get(i).getDiaWenkday(),
-                            diaryEntityList.get(i).getDiaWeather(),
-                            diaryEntityList.get(i).getDiaId()));
-                }
-                if (diaryIInformationEntityList != null) {
-                    RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, diaryIInformationEntityList);
+                if (diaryEntityList != null) {
+                    RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, diaryEntityList);
                     mRecycleView.setAdapter(adapter);
                     adapter.setOnItemClickListener(this);
                     adapter.setOnItemLongClickListener(this);
@@ -288,7 +269,7 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
                 int mouth = datePicker.getMonth();
                 int day = datePicker.getDayOfMonth();
                 int[] date = {year, mouth, day};
-                 intent = new Intent(MainActivity.this, ReadDiaryActivity.class);
+                intent = new Intent(MainActivity.this, ReadDiaryActivity.class);
                 intent.putExtra("date", date);
                 startActivity(intent);
                 MDrawerLayout.closeDrawers();
@@ -300,13 +281,13 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
 // TODO: 2017/2/23
                 break;
             case R.id.item_setting:
-                intent=new Intent(MainActivity.this,SettingActivity.class);
+                intent = new Intent(MainActivity.this, SettingActivity.class);
                 startActivity(intent);
                 MDrawerLayout.closeDrawers();
                 break;
             case R.id.item_aboutapp:
                 MDrawerLayout.closeDrawers();
-                intent=new Intent(MainActivity.this,AboutAPPActivity.class);
+                intent = new Intent(MainActivity.this, AboutAPPActivity.class);
                 startActivity(intent);
                 break;
         }
