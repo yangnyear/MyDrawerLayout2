@@ -74,6 +74,7 @@ public class DiaryActivity extends AppCompatActivity implements View.OnClickList
         diaWeekday.setText(weekdayLooper);
     }
 
+    //初始化
     private void initiate() {
         //toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar_diaryactivity);
@@ -123,6 +124,7 @@ public class DiaryActivity extends AppCompatActivity implements View.OnClickList
         }
 
     }
+    //获取当前日期为周几
     public void getWeekDay(){
         final Calendar c = Calendar.getInstance();
         weekday= String.valueOf(c.get(Calendar.DAY_OF_WEEK));
@@ -144,6 +146,7 @@ public class DiaryActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    //保存数据
     public void setDiary() {
         if (diaContent.getText().toString().equals("")) {
             Toast.makeText(DiaryActivity.this, "亲！还没写内容呢", Toast.LENGTH_SHORT).show();
@@ -153,6 +156,7 @@ public class DiaryActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(DiaryActivity.this, "亲！填一下天气吧", Toast.LENGTH_SHORT).show();
             return;
         }
+        //如果没有标题时
         if (diaTitle.getText().toString().equals("")) {
             titleLooper = "无标题";
             idLooper = ++idLooper;
@@ -170,7 +174,7 @@ public class DiaryActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(DiaryActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
             setResult(RESULT_OK);
             finish();
-        } else {
+        } else {//有标题
             titleLooper = diaTitle.getText().toString();
             idLooper = ++idLooper;
 

@@ -9,6 +9,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.DatePicker;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +54,9 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
     private String date, tody;
     private SharedPreferences sharedPreferences;
     private int idLooper = 0;
+    private RadioGroup radioGroup;
+    private LinearLayoutManager layoutManager;
+    private RecyclerViewAdapter adapter;
 
 
     @Override
@@ -63,7 +68,9 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
         initializete();
         //配置RecyclerView的Adapter
         if (diaryEntityList != null) {
-            RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, diaryEntityList);
+//        //设置布局的排版方向
+//        layoutManager.setOrientation(GridLayoutManager.HORIZONTAL);
+            adapter = new RecyclerViewAdapter(this, diaryEntityList);
             mRecycleView.setAdapter(adapter);
             adapter.setOnItemClickListener(this);
             adapter.setOnItemLongClickListener(this);
@@ -81,11 +88,12 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
 
         MDrawerLayout = (DrawerLayout) findViewById(R.id.dl_main_drawer);
         mRecycleView = (RecyclerView) findViewById(R.id.recycleview_diary);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(this);
         //设置布局管理器
         mRecycleView.setLayoutManager(layoutManager);
         //设置为垂直布局，这也是默认的
         layoutManager.setOrientation(OrientationHelper.VERTICAL);
+
 
         //初始化inflater
         inflater = LayoutInflater.from(MainActivity.this);
@@ -132,6 +140,10 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
         return super.onOptionsItemSelected(item);
     }
 
+    public void notifyDataSetChanged() {
+        adapter.notifyDataSetChanged();
+    }
+
     //判断今天是否写过日记
     public boolean isWrite() {
         if (diaryEntityList.size() < 1) {
@@ -154,8 +166,6 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
         Intent intent = new Intent(MainActivity.this, ReadDiaryActivity.class);
         intent.putExtra("readDiaryBeen", diaryBeen);
         startActivity(intent);
-
-
     }
 
     //长按弹出dialog
@@ -198,15 +208,8 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
                                 Toast.makeText(MainActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
                                 //删除成功后更新界面
                                 diaryEntityList.clear();
-                                mRecycleView.removeAllViews();
-                                diaryEntityList.clear();
                                 mDataBase.selectDiary(diaryEntityList);
-                                if (diaryEntityList != null) {
-                                    RecyclerViewAdapter adapter = new RecyclerViewAdapter(MainActivity.this, diaryEntityList);
-                                    mRecycleView.setAdapter(adapter);
-                                    adapter.setOnItemClickListener(MainActivity.this);
-                                    adapter.setOnItemLongClickListener(MainActivity.this);
-                                }
+                                notifyDataSetChanged();
                             }
                         })
                                 //取消,不进行删除
@@ -219,13 +222,6 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
                 warmDialog.show();
             }
         });
-//        setPasswd = (TextView) dialogView.findViewById(R.id.text_addpasswd);
-//        setPasswd.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialog.dismiss();
-//                Toast.makeText(MainActivity.this, "暂时还不能加密，等待更新", Toast.LENGTH_SHORT).show();
-//            }
 
     }
 
@@ -235,16 +231,8 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
         switch (resultCode) {
             case RESULT_OK:
                 diaryEntityList.clear();
-                mRecycleView.removeAllViews();
-                diaryEntityList.clear();
                 mDataBase.selectDiary(diaryEntityList);
-                if (diaryEntityList != null) {
-                    RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, diaryEntityList);
-                    mRecycleView.setAdapter(adapter);
-                    adapter.setOnItemClickListener(this);
-                    adapter.setOnItemLongClickListener(this);
-                } else
-                    Toast.makeText(this, "快开始写日记吧", Toast.LENGTH_SHORT).show();
+                notifyDataSetChanged();
                 break;
         }
     }
@@ -253,10 +241,11 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         Intent intent;
+        final AlertDialog.Builder dialog;
         switch (item.getItemId()) {
             case R.id.item_dataconnecter:
                 MDrawerLayout.closeDrawers();
-                AlertDialog.Builder dialog = (AlertDialog.Builder) new AlertDialog
+               dialog = (AlertDialog.Builder) new AlertDialog
                         .Builder(MainActivity.this)
                         .setTitle("数据统计")
                         .setMessage("您现在有" + diaryEntityList.size() + "篇日记\n"
@@ -275,14 +264,31 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
                 MDrawerLayout.closeDrawers();
                 break;
             case R.id.item_settimetonotificate:
-// TODO: 2017/2/22 后台,提醒
+                // TODO: 2017/2/22 后台,提醒
                 break;
-            case R.id.item_:
-// TODO: 2017/2/23
+            case R.id.item_layoutmood:
+                view = inflater.inflate(R.layout.layoutmood_item, null);
+                MDrawerLayout.closeDrawers();
+                final AlertDialog layoutDialog1 = new AlertDialog
+                        .Builder(MainActivity.this)
+                        .setView(view)
+                        .show();
+                radioGroup = (RadioGroup) view.findViewById(R.id.rediogroup_more);
+                switch (radioGroup.getCheckedRadioButtonId()) {
+                    case R.id.rb_liebiao:
+                        //设置布局的排版方向
+                        layoutManager.setOrientation(GridLayoutManager.HORIZONTAL);
+                        layoutDialog1.dismiss();
+                        notifyDataSetChanged();
+                        break;
+                    case R.id.rd_wangge:
+                        layoutManager.setOrientation(GridLayoutManager.VERTICAL);
+                        layoutDialog1.dismiss();
+                        notifyDataSetChanged();
+                }
                 break;
             case R.id.item_setting:
-                intent = new Intent(MainActivity.this, SettingActivity.class);
-                startActivity(intent);
+
                 MDrawerLayout.closeDrawers();
                 break;
             case R.id.item_aboutapp:

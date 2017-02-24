@@ -81,22 +81,23 @@ public class ReviseDiaryActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    //更新数据
     public void update() {
         title = thisDiaryTitle.getText().toString();
         weather = thisDiaryWeather.getText().toString();
         content = thisDiaryContent.getText().toString();
         if (title.equals(""))
-            title="无标题";
-        if (weather.equals("")){
+            title = "无标题";
+        if (weather.equals("")) {
             Toast.makeText(ReviseDiaryActivity.this, "亲！写一下天气吧!", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (content.equals("")){
+        if (content.equals("")) {
             Toast.makeText(ReviseDiaryActivity.this, "内容都没有!", Toast.LENGTH_SHORT).show();
             return;
         }
-        Object[] values=new Object[]{title, weather, content};
-        mDatabase.upDateDiary(diaryEntityBeen.getDiaId(),values );
+        Object[] values = new Object[]{title, weather, content};
+        mDatabase.upDateDiary(diaryEntityBeen.getDiaId(), values);
         Toast.makeText(ReviseDiaryActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
         setResult(RESULT_OK);
         finish();

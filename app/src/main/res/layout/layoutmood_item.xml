@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:padding="12dp"
+        android:text="请选择布局方式"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18dp" />
+
+    <RadioGroup
+        android:id="@+id/rediogroup_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rb_liebiao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="列表布局"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18dp" />
+
+        <RadioButton
+            android:id="@+id/rd_wangge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="网格布局"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18dp" />
+    </RadioGroup>
+
+</LinearLayout>
