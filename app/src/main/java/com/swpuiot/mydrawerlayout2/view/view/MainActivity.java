@@ -4,12 +4,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -263,31 +263,55 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
                 startActivity(intent);
                 MDrawerLayout.closeDrawers();
                 break;
-            case R.id.item_settimetonotificate:
-                // TODO: 2017/2/22 后台,提醒
-                break;
-            case R.id.item_layoutmood:
-                view = inflater.inflate(R.layout.layoutmood_item, null);
-                MDrawerLayout.closeDrawers();
-                final AlertDialog layoutDialog1 = new AlertDialog
-                        .Builder(MainActivity.this)
-                        .setView(view)
-                        .show();
-                radioGroup = (RadioGroup) view.findViewById(R.id.rediogroup_more);
-                switch (radioGroup.getCheckedRadioButtonId()) {
-                    case R.id.rb_liebiao:
-                        //设置布局的排版方向
-                        layoutManager.setOrientation(GridLayoutManager.HORIZONTAL);
-                        layoutDialog1.dismiss();
-                        notifyDataSetChanged();
-                        break;
-                    case R.id.rd_wangge:
-                        layoutManager.setOrientation(GridLayoutManager.VERTICAL);
-                        layoutDialog1.dismiss();
-                        notifyDataSetChanged();
-                }
-                break;
+//            case R.id.item_settimetonotificate:
+//                // TODO: 2017/2/22 后台,提醒
+//                break;
+//            case R.id.item_layoutmood:
+//                view = inflater.inflate(R.layout.layoutmood_item, null);
+//                MDrawerLayout.closeDrawers();
+//                final AlertDialog layoutDialog1 = new AlertDialog
+//                        .Builder(MainActivity.this)
+//                        .setView(view)
+//                        .show();
+//                radioGroup = (RadioGroup) view.findViewById(R.id.rediogroup_more);
+
+//                switch (radioGroup.getCheckedRadioButtonId()) {
+//                    case R.id.rb_liebiao:
+//                        //设置布局的排版方向
+//                        layoutManager.setOrientation(GridLayoutManager.HORIZONTAL);
+//                        layoutDialog1.dismiss();
+//                        notifyDataSetChanged();
+//                        break;
+//                    case R.id.rd_wangge:
+//                        layoutManager.setOrientation(GridLayoutManager.VERTICAL);
+//                        layoutDialog1.dismiss();
+//                        notifyDataSetChanged();
+ //                }
+//                view.findViewById(R.id.rb_liebiao).setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        //设置布局的排版方向
+//                        layoutManager.setOrientation(GridLayoutManager.VERTICAL);
+//                        layoutDialog1.dismiss();
+//                        notifyDataSetChanged();
+//                    }
+//                });
+//
+//                view.findViewById(R.id.rd_wangge).setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        layoutManager.setOrientation(GridLayoutManager.VERTICAL);
+//                        layoutDialog1.dismiss();
+//                        notifyDataSetChanged();
+//                    }
+//                });
+//                break;
             case R.id.item_setting:
+                 intent= new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse("https://github.com/yangnyear/MyDrawerLayout2/tree/master/app");
+                intent.setData(content_url);
+                startActivity(intent);
 
                 MDrawerLayout.closeDrawers();
                 break;
