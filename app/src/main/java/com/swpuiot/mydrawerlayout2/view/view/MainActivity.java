@@ -263,8 +263,7 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
                 startActivity(intent);
                 MDrawerLayout.closeDrawers();
                 break;
-//            case R.id.item_settimetonotificate:
-//                // TODO: 2017/2/22 后台,提醒
+//            case R.id.item_settimetonotificate:'
 //                break;
 //            case R.id.item_layoutmood:
 //                view = inflater.inflate(R.layout.layoutmood_item, null);

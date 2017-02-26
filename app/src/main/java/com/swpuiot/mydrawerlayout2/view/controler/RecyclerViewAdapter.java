@@ -41,7 +41,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.datefiled.setText(diaryIInformationEntityList.get(position).getDiaDate());
         holder.weekday.setText(diaryIInformationEntityList.get(position).getDiaWenkday());
         holder.weather.setText(diaryIInformationEntityList.get(position).getDiaWeather());
-        holder.diaId.setText(diaryIInformationEntityList.get(position).getDiaId()+"");
+        holder.diaId.setText(position+1+"");
 
     }
 
