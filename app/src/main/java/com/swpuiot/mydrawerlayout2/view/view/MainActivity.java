@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
         datePicker = (DatePicker) view.findViewById(R.id.tatepicker_coisetime);
 
         sharedPreferences = getSharedPreferences("diaID", MODE_PRIVATE);
-        idLooper = sharedPreferences.getInt("idLooper", idLooper);
+
 
 
         diaryEntityList = new ArrayList<DiaryEntity>();
@@ -241,6 +241,7 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         Intent intent;
+        idLooper = sharedPreferences.getInt("idLooper", idLooper);
         final AlertDialog.Builder dialog;
         switch (item.getItemId()) {
             case R.id.item_dataconnecter:
@@ -257,10 +258,19 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
                 int year = datePicker.getYear();
                 int mouth = datePicker.getMonth();
                 int day = datePicker.getDayOfMonth();
-                int[] date = {year, mouth, day};
-                intent = new Intent(MainActivity.this, ReadDiaryActivity.class);
-                intent.putExtra("date", date);
-                startActivity(intent);
+                int maxdayoflastmouth= mDataBase.maxDayOfMouth(year, mouth);
+                if (day>maxdayoflastmouth){
+                    dialog = (AlertDialog.Builder) new AlertDialog
+                            .Builder(MainActivity.this)
+                            .setTitle("提示")
+                            .setMessage("上月没有"+day+"号");
+                    dialog.show();
+                }else {
+                    int[] date = {year, mouth, day};
+                    intent = new Intent(MainActivity.this, ReadDiaryActivity.class);
+                    intent.putExtra("date", date);
+                    startActivity(intent);
+                }
                 MDrawerLayout.closeDrawers();
                 break;
 //            case R.id.item_settimetonotificate:'
