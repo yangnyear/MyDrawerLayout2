@@ -25,12 +25,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.swpuiot.mydrawerlayout2.R;
-import com.swpuiot.mydrawerlayout2.view.controler.DataBaseFunction;
-import com.swpuiot.mydrawerlayout2.view.controler.MyItemClickListener;
-import com.swpuiot.mydrawerlayout2.view.controler.MyItemLongClickListener;
-import com.swpuiot.mydrawerlayout2.view.controler.RecyclerViewAdapter;
-import com.swpuiot.mydrawerlayout2.view.model.DiaryEntity;
-import com.swpuiot.mydrawerlayout2.view.model.DiaryIInformationEntity;
+import com.swpuiot.mydrawerlayout2.view.data.DataBaseFunction;
+import com.swpuiot.mydrawerlayout2.view.clicklistener.MyItemClickListener;
+import com.swpuiot.mydrawerlayout2.view.clicklistener.MyItemLongClickListener;
+import com.swpuiot.mydrawerlayout2.view.adapter.RecyclerViewAdapter;
+import com.swpuiot.mydrawerlayout2.view.entities.DiaryEntity;
+import com.swpuiot.mydrawerlayout2.view.entities.DiaryIInformationEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
     private RadioGroup radioGroup;
     private LinearLayoutManager layoutManager;
     private RecyclerViewAdapter adapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -273,48 +272,9 @@ public class MainActivity extends AppCompatActivity implements MyItemClickListen
                 }
                 MDrawerLayout.closeDrawers();
                 break;
-//            case R.id.item_settimetonotificate:'
-//                break;
-//            case R.id.item_layoutmood:
-//                view = inflater.inflate(R.layout.layoutmood_item, null);
-//                MDrawerLayout.closeDrawers();
-//                final AlertDialog layoutDialog1 = new AlertDialog
-//                        .Builder(MainActivity.this)
-//                        .setView(view)
-//                        .show();
-//                radioGroup = (RadioGroup) view.findViewById(R.id.rediogroup_more);
-
-//                switch (radioGroup.getCheckedRadioButtonId()) {
-//                    case R.id.rb_liebiao:
-//                        //设置布局的排版方向
-//                        layoutManager.setOrientation(GridLayoutManager.HORIZONTAL);
-//                        layoutDialog1.dismiss();
-//                        notifyDataSetChanged();
-//                        break;
-//                    case R.id.rd_wangge:
-//                        layoutManager.setOrientation(GridLayoutManager.VERTICAL);
-//                        layoutDialog1.dismiss();
-//                        notifyDataSetChanged();
- //                }
-//                view.findViewById(R.id.rb_liebiao).setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        //设置布局的排版方向
-//                        layoutManager.setOrientation(GridLayoutManager.VERTICAL);
-//                        layoutDialog1.dismiss();
-//                        notifyDataSetChanged();
-//                    }
-//                });
-//
-//                view.findViewById(R.id.rd_wangge).setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        layoutManager.setOrientation(GridLayoutManager.VERTICAL);
-//                        layoutDialog1.dismiss();
-//                        notifyDataSetChanged();
-//                    }
-//                });
-//                break;
+            case R.id.item_settimetonotificate:
+                // TODO: 2017/3/6 startservice
+                break;
             case R.id.item_setting:
                  intent= new Intent();
                 intent.setAction("android.intent.action.VIEW");

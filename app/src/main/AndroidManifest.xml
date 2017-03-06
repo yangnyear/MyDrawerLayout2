@@ -21,6 +21,8 @@
         <activity android:name=".view.view.ReviseDiaryActivity" />
         <activity android:name=".view.view.ReadDiaryActivity" />
         <activity android:name=".view.view.AboutAPPActivity" />
+        <service android:name=".view.services.TimeKeepService"/>
+        <receiver android:name=".view.receiver.AlarmReceiver"/>
     </application>
 
 </manifest>

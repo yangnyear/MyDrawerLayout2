@@ -13,8 +13,8 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.swpuiot.mydrawerlayout2.R;
-import com.swpuiot.mydrawerlayout2.view.controler.DataBaseFunction;
-import com.swpuiot.mydrawerlayout2.view.model.DiaryEntity;
+import com.swpuiot.mydrawerlayout2.view.data.DataBaseFunction;
+import com.swpuiot.mydrawerlayout2.view.entities.DiaryEntity;
 
 public class ReadDiaryActivity extends AppCompatActivity implements View.OnClickListener {
     private Toolbar toolbar;

@@ -1,4 +1,4 @@
-package com.swpuiot.mydrawerlayout2.view.model;
+package com.swpuiot.mydrawerlayout2.view.entities;
 
 import java.io.Serializable;
 

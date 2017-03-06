@@ -1,4 +1,4 @@
-package com.swpuiot.mydrawerlayout2.view.controler;
+package com.swpuiot.mydrawerlayout2.view.clicklistener;
 
 /**
  * Created by 羊荣毅_L on 2017/2/17.

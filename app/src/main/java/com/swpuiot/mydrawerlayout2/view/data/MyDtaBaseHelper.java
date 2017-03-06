@@ -1,4 +1,4 @@
-package com.swpuiot.mydrawerlayout2.view.controler;
+package com.swpuiot.mydrawerlayout2.view.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

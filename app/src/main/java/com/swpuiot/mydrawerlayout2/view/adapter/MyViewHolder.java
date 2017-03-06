@@ -1,4 +1,4 @@
-package com.swpuiot.mydrawerlayout2.view.model;
+package com.swpuiot.mydrawerlayout2.view.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -7,8 +7,8 @@ import android.view.View.OnLongClickListener;
 import android.widget.TextView;
 
 import com.swpuiot.mydrawerlayout2.R;
-import com.swpuiot.mydrawerlayout2.view.controler.MyItemClickListener;
-import com.swpuiot.mydrawerlayout2.view.controler.MyItemLongClickListener;
+import com.swpuiot.mydrawerlayout2.view.clicklistener.MyItemClickListener;
+import com.swpuiot.mydrawerlayout2.view.clicklistener.MyItemLongClickListener;
 
 /**
  * Created by 羊荣毅_L on 2017/2/17.

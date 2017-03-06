@@ -10,8 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.swpuiot.mydrawerlayout2.R;
-import com.swpuiot.mydrawerlayout2.view.controler.DataBaseFunction;
-import com.swpuiot.mydrawerlayout2.view.model.DiaryEntity;
+import com.swpuiot.mydrawerlayout2.view.data.DataBaseFunction;
+import com.swpuiot.mydrawerlayout2.view.entities.DiaryEntity;
 
 public class ReviseDiaryActivity extends AppCompatActivity implements View.OnClickListener {
     private Toolbar toolbar;

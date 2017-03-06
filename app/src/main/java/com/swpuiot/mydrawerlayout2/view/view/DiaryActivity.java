@@ -15,8 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.swpuiot.mydrawerlayout2.R;
-import com.swpuiot.mydrawerlayout2.view.controler.DataBaseFunction;
-import com.swpuiot.mydrawerlayout2.view.controler.MyDtaBaseHelper;
+import com.swpuiot.mydrawerlayout2.view.data.DataBaseFunction;
+import com.swpuiot.mydrawerlayout2.view.data.MyDtaBaseHelper;
 
 import java.util.Calendar;
 

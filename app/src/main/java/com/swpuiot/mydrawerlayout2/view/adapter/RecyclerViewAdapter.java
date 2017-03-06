@@ -1,4 +1,4 @@
-package com.swpuiot.mydrawerlayout2.view.controler;
+package com.swpuiot.mydrawerlayout2.view.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.swpuiot.mydrawerlayout2.R;
-import com.swpuiot.mydrawerlayout2.view.model.DiaryEntity;
-import com.swpuiot.mydrawerlayout2.view.model.MyViewHolder;
+import com.swpuiot.mydrawerlayout2.view.clicklistener.MyItemClickListener;
+import com.swpuiot.mydrawerlayout2.view.clicklistener.MyItemLongClickListener;
+import com.swpuiot.mydrawerlayout2.view.entities.DiaryEntity;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
-package com.swpuiot.mydrawerlayout2.view.controler;
+package com.swpuiot.mydrawerlayout2.view.data;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.swpuiot.mydrawerlayout2.view.model.DiaryEntity;
+import com.swpuiot.mydrawerlayout2.view.entities.DiaryEntity;
 
 import java.util.List;
 

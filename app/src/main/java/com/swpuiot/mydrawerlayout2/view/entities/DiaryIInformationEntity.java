@@ -1,4 +1,4 @@
-package com.swpuiot.mydrawerlayout2.view.model;
+package com.swpuiot.mydrawerlayout2.view.entities;
 
 /**
  * Created by 羊荣毅_L on 2017/1/15.
